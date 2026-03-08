@@ -72,7 +72,7 @@ const ROOMS = [
 const EXPERIENCES = [
   { id:1, category:"LEISURE", title:"Infinity Pool", description:"Rooftop infinity pool with panoramic city views. Open daily 7:00 AM – 10:00 PM.", image:"https://www.regattasuites.com.my/wp-content/uploads/2020/04/pool.png" },
   { id:2, category:"FITNESS", title:"Sky Gym", description:"Fully equipped Sky Gym with modern exercise equipment and stunning city views.", image:"https://www.regattasuites.com.my/wp-content/uploads/2020/04/gym.png" },
-  { id:3, category:"DINING", title:"Theatre Restaurant", description:"Savour Chinese, Malaysian and local Sarawakian cuisine. Serving breakfast, lunch and dinner.", image:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" },
+  { id:3, category:"DINING", title:"Tabas", description:"Chill out at Tabas Lounge by Regatta Suites with cozy vibes.", image:"https://scontent.fkch3-1.fna.fbcdn.net/v/t39.30808-6/480515649_1060633199412399_6521182119698362404_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=_R5ARJPgfk0Q7kNvwE0cpOC&_nc_oc=AdmuiecxUAGpKmVV08cdojbQyO_MwezRge7ikvDDsDGr3ojj-HcuwEvs4Mt5deNlkcrkbi5q0SqamLGonM_IVctW&_nc_zt=23&_nc_ht=scontent.fkch3-1.fna&_nc_gid=6KgyNSj9ASE3LqxV6RrjDw&_nc_ss=8&oh=00_Afz0hWoZ5Nq8zg_N3SHIvIV1zvZ-vaepXMZgIVEVmYRt_A&oe=69B2FFFC" },
 ];
 
 // ─── ICONS ───────────────────────────────────────────────────────────────────
@@ -271,7 +271,7 @@ const HomePage = ({ navigate, setBooking }) => {
         <div style={{ position:"absolute",inset:0,backgroundImage:"url(https://www.regattasuites.com.my/wp-content/uploads/2024/05/Deluxe-Queen-Bed.jpg)",backgroundSize:"cover",backgroundPosition:"center",opacity:0.18 }} />
 
         <div style={{ position:"relative",zIndex:1,textAlign:"center",width:"100%",maxWidth: isMobile ? "100%" : 660,padding: isMobile ? "0 20px" : "0 24px" }}>
-          <img src={LOGO_URL} alt="Regatta Suites" style={{ height: isMobile ? 48 : 60,objectFit:"contain",marginBottom: isMobile ? 18 : 24 }} />
+          {/* <img src={LOGO_URL} alt="Regatta Suites" style={{ height: isMobile ? 48 : 60,objectFit:"contain",marginBottom: isMobile ? 18 : 24 }} /> */}
 
           <div style={{ display:"inline-block",border:"1px solid rgba(212,160,23,0.4)",borderRadius:20,padding:"5px 16px",marginBottom: isMobile ? 14 : 18,color:"#D4A017",fontSize:10,fontWeight:700,letterSpacing:"0.12em" }}>
             URBAN LIVING REDEFINED
@@ -381,9 +381,9 @@ const HomePage = ({ navigate, setBooking }) => {
               {isMobile ? "Everything Under One Roof" : "Everything You Need,\nUnder One Roof"}
             </h2>
           </div>
-          <button onClick={() => navigate("rooms")} style={{ background:"none",border:"none",color:"#94a3b8",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",gap:8,fontFamily:"inherit" }}>
+          {/* <button onClick={() => navigate("rooms")} style={{ background:"none",border:"none",color:"#94a3b8",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",gap:8,fontFamily:"inherit" }}>
             View All Rooms <Icon name="arrow" size={16} color="#94a3b8" />
-          </button>
+          </button> */}
         </div>
         <div style={{ display:"grid",gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 1fr" : "repeat(3,1fr)",gap: isMobile ? 16 : 24 }}>
           {EXPERIENCES.map(exp => (
