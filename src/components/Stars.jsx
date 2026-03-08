@@ -1,11 +1,14 @@
 import Icon from './Icon';
 
-const Stars = ({ rating }) => (
-  <span style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-    {[1, 2, 3, 4, 5].map((i) => (
-      <Icon key={i} name="star" size={12} color={i <= Math.round(rating) ? '#D4A017' : '#334155'} />
-    ))}
-  </span>
-);
+const Stars = ({ rating }) => {
+  const full  = Math.floor(rating);
+  const empty = 5 - full;
+  return (
+    <span style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+      {[...Array(full)].map((_, i)  => <Icon key={`f${i}`} name="star" size={13} color="#D4A017" />)}
+      {[...Array(empty)].map((_, i) => <Icon key={`e${i}`} name="star" size={13} color="#1e293b" />)}
+    </span>
+  );
+};
 
 export default Stars;
