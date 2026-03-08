@@ -1,6 +1,10 @@
 import Icon from '../components/Icon';
+import useWindowSize from '../hooks/useWindowSize';
 
 const ConfirmationPage = ({ confirmation, navigate }) => {
+  const { w } = useWindowSize();
+  const isMobile = w < 768;
+
   const { room, total, ref, card } = confirmation;
 
   const handleDownload = () => {
@@ -36,41 +40,43 @@ Tel: +60 82-230099 | +60 82-231999
 
   return (
     <div style={{ background: '#070c1a', minHeight: '100vh', paddingTop: 64 }}>
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '60px 40px' }}>
+      <div style={{ maxWidth: 860, margin: '0 auto', padding: isMobile ? '36px 20px 60px' : '60px 40px' }}>
+
         {/* Success Icon */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <div style={{
-            width: 72, height: 72, borderRadius: '50%',
+            width: isMobile ? 60 : 72, height: isMobile ? 60 : 72, borderRadius: '50%',
             background: 'rgba(212,160,23,0.15)', border: '2px solid #D4A017',
             display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px',
           }}>
-            <Icon name="check" size={32} color="#D4A017" />
+            <Icon name="check" size={isMobile ? 26 : 32} color="#D4A017" />
           </div>
-          <h1 style={{ fontSize: 40, fontWeight: 700, color: '#f1f5f9', fontFamily: "'Playfair Display', Georgia, serif", marginBottom: 12 }}>
+          <h1 style={{ fontSize: isMobile ? 28 : 40, fontWeight: 700, color: '#f1f5f9', fontFamily: "'Playfair Display', Georgia, serif", marginBottom: 12 }}>
             Booking Confirmed!
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: 15, lineHeight: 1.7 }}>
-            Your stay at Regatta Suites Kuching is all set. A confirmation email<br />has been sent to your inbox.
+          <p style={{ color: '#94a3b8', fontSize: isMobile ? 14 : 15, lineHeight: 1.7 }}>
+            Your stay at Regatta Suites Kuching is all set.{isMobile ? ' ' : <br />}A confirmation email has been sent to your inbox.
           </p>
         </div>
 
         {/* Confirmation Card */}
         <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 20, overflow: 'hidden' }}>
           {/* Room Banner */}
-          <div style={{ position: 'relative', height: 200 }}>
+          <div style={{ position: 'relative', height: isMobile ? 160 : 200 }}>
             <img src={room.images[0]} alt={room.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(13,20,36,0.9) 0%, transparent 50%)' }} />
             <div style={{ position: 'absolute', bottom: 20, left: 24 }}>
               <span style={{ background: '#D4A017', color: '#000', fontSize: 10, fontWeight: 800, padding: '4px 10px', borderRadius: 6, letterSpacing: '0.08em' }}>CONFIRMED</span>
-              <h2 style={{ color: '#fff', fontSize: 24, fontWeight: 700, marginTop: 8, fontFamily: "'Playfair Display', Georgia, serif" }}>{room.name}</h2>
+              <h2 style={{ color: '#fff', fontSize: isMobile ? 18 : 24, fontWeight: 700, marginTop: 8, fontFamily: "'Playfair Display', Georgia, serif" }}>{room.name}</h2>
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
+          {/* Inner grid — stacked on mobile, side-by-side on desktop */}
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 0 }}>
             {/* Reservation Summary */}
-            <div style={{ padding: 28, borderRight: '1px solid #1e293b' }}>
+            <div style={{ padding: isMobile ? 20 : 28, borderRight: isMobile ? 'none' : '1px solid #1e293b', borderBottom: isMobile ? '1px solid #1e293b' : 'none' }}>
               <p style={{ color: '#D4A017', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', marginBottom: 12 }}>RESERVATION SUMMARY</p>
-              <p style={{ color: '#f1f5f9', fontSize: 22, fontWeight: 700, marginBottom: 24, fontFamily: "'Playfair Display', Georgia, serif" }}>Ref: #{ref}</p>
+              <p style={{ color: '#f1f5f9', fontSize: isMobile ? 18 : 22, fontWeight: 700, marginBottom: 24, fontFamily: "'Playfair Display', Georgia, serif" }}>Ref: #{ref}</p>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }}>
                 <div>
@@ -103,7 +109,7 @@ Tel: +60 82-230099 | +60 82-231999
             </div>
 
             {/* Payment Details */}
-            <div style={{ padding: 28 }}>
+            <div style={{ padding: isMobile ? 20 : 28 }}>
               <p style={{ color: '#D4A017', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', marginBottom: 20 }}>PAYMENT DETAILS</p>
               {[
                 { label: `Nightly Rate × 2 Nights`, val: `RM ${nightly}.00` },
@@ -111,14 +117,14 @@ Tel: +60 82-230099 | +60 82-231999
                 { label: 'Taxes & Fees', val: `RM ${taxes}.00` },
               ].map(row => (
                 <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-                  <span style={{ color: '#64748b', fontSize: 14 }}>{row.label}</span>
-                  <span style={{ color: '#94a3b8', fontSize: 14 }}>{row.val}</span>
+                  <span style={{ color: '#64748b', fontSize: isMobile ? 13 : 14 }}>{row.label}</span>
+                  <span style={{ color: '#94a3b8', fontSize: isMobile ? 13 : 14 }}>{row.val}</span>
                 </div>
               ))}
               <div style={{ borderTop: '1px solid #1e293b', paddingTop: 16, marginTop: 8, marginBottom: 24 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#f1f5f9', fontSize: 16, fontWeight: 700 }}>Total Paid</span>
-                  <span style={{ color: '#D4A017', fontSize: 22, fontWeight: 700 }}>RM {grandTotal}.00</span>
+                  <span style={{ color: '#f1f5f9', fontSize: isMobile ? 15 : 16, fontWeight: 700 }}>Total Paid</span>
+                  <span style={{ color: '#D4A017', fontSize: isMobile ? 18 : 22, fontWeight: 700 }}>RM {grandTotal}.00</span>
                 </div>
                 <p style={{ color: '#475569', fontSize: 12, marginTop: 4 }}>Charged to Card ending in •••• {card || '4412'}</p>
               </div>
@@ -156,16 +162,16 @@ Tel: +60 82-230099 | +60 82-231999
           </div>
 
           {/* Perks Bar */}
-          <div style={{ borderTop: '1px solid #1e293b', padding: '16px 28px', display: 'flex', justifyContent: 'center', gap: 40, flexWrap: 'wrap' }}>
+          <div style={{ borderTop: '1px solid #1e293b', padding: isMobile ? '14px 20px' : '16px 28px', display: 'flex', justifyContent: 'center', gap: isMobile ? 16 : 40, flexWrap: 'wrap' }}>
             {['📶 Complimentary High-Speed WiFi', '🏊 Infinity Pool Access', '💪 Sky Gym Access'].map(perk => (
-              <span key={perk} style={{ color: '#64748b', fontSize: 13 }}>{perk}</span>
+              <span key={perk} style={{ color: '#64748b', fontSize: isMobile ? 12 : 13 }}>{perk}</span>
             ))}
           </div>
         </div>
 
-        {/* Address + Contact */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginTop: 24 }}>
-          <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: 24 }}>
+        {/* Address + Contact — stacked on mobile */}
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 20, marginTop: 24 }}>
+          <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: isMobile ? 20 : 24 }}>
             <p style={{ color: '#D4A017', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', marginBottom: 10 }}>HOTEL ADDRESS</p>
             <div style={{ display: 'flex', gap: 10 }}>
               <Icon name="map" size={18} color="#D4A017" />
@@ -179,7 +185,7 @@ Tel: +60 82-230099 | +60 82-231999
               </div>
             </div>
           </div>
-          <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: isMobile ? 20 : 24, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <p style={{ color: '#D4A017', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', marginBottom: 10 }}>NEED ASSISTANCE?</p>
             <p style={{ color: '#94a3b8', fontSize: 14, lineHeight: 1.6, marginBottom: 16 }}>
               Our team is available to assist you with your arrival.

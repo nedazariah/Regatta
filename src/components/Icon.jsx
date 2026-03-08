@@ -124,6 +124,11 @@ const Icon = ({ name, size = 18, color = "currentColor" }) => {
         <path d="M2 17h20"/><path d="M6 8v9"/>
       </svg>
     ),
+    menu: (
+      <svg width={size} height={size} fill="none" stroke={color} strokeWidth="2" viewBox="0 0 24 24">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    ),
   };
   return icons[name] || null;
 };

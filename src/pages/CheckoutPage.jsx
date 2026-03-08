@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import Icon from '../components/Icon';
+import useWindowSize from '../hooks/useWindowSize';
 import { ROOMS } from '../data/rooms';
 
 const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
+  const { w } = useWindowSize();
+  const isMobile = w < 768;
+
   const room = booking.room || ROOMS[3];
   const nights = 2;
   const nightly = room.price * nights;
@@ -47,34 +51,37 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
 
   return (
     <div style={{ background: '#070c1a', minHeight: '100vh', paddingTop: 64 }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 40px' }}>
-        {/* Header */}
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: isMobile ? '28px 20px 60px' : '48px 40px' }}>
+
         <button
           onClick={() => navigate('room-detail')}
           style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: 14, display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24, fontFamily: 'inherit', padding: 0 }}
         >
           ← Back
         </button>
-        <h1 style={{ fontSize: 36, fontWeight: 700, color: '#f1f5f9', fontFamily: "'Playfair Display', Georgia, serif", marginBottom: 8 }}>
+
+        <h1 style={{ fontSize: isMobile ? 26 : 36, fontWeight: 700, color: '#f1f5f9', fontFamily: "'Playfair Display', Georgia, serif", marginBottom: 8 }}>
           Complete Your Booking
         </h1>
-        <p style={{ color: '#64748b', marginBottom: 40 }}>Secure your luxury stay at Regatta Stay</p>
+        <p style={{ color: '#64748b', marginBottom: isMobile ? 24 : 40, fontSize: isMobile ? 13 : 15 }}>Secure your luxury stay at Regatta Stay</p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 28 }}>
+        {/* Stacked on mobile, side-by-side on desktop */}
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.3fr', gap: isMobile ? 20 : 28 }}>
+
           {/* ── Booking Summary ──────────────────────────────── */}
-          <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: 28 }}>
+          <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: isMobile ? 20 : 28 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
               <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(212,160,23,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ color: '#D4A017', fontSize: 14 }}>ℹ</span>
               </div>
-              <h2 style={{ color: '#f1f5f9', fontSize: 18, fontWeight: 700, fontFamily: "'Playfair Display', Georgia, serif" }}>Booking Summary</h2>
+              <h2 style={{ color: '#f1f5f9', fontSize: isMobile ? 16 : 18, fontWeight: 700, fontFamily: "'Playfair Display', Georgia, serif" }}>Booking Summary</h2>
             </div>
 
-            <div style={{ borderRadius: 12, overflow: 'hidden', marginBottom: 20, height: 200 }}>
+            <div style={{ borderRadius: 12, overflow: 'hidden', marginBottom: 20, height: isMobile ? 160 : 200 }}>
               <img src={room.images[0]} alt={room.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
 
-            <h3 style={{ color: '#f1f5f9', fontSize: 18, fontWeight: 700, marginBottom: 4, fontFamily: "'Playfair Display', Georgia, serif" }}>{room.name}</h3>
+            <h3 style={{ color: '#f1f5f9', fontSize: isMobile ? 16 : 18, fontWeight: 700, marginBottom: 4, fontFamily: "'Playfair Display', Georgia, serif" }}>{room.name}</h3>
             <p style={{ color: '#D4A017', fontSize: 13, marginBottom: 20 }}>Regatta Stay Resort & Spa</p>
 
             {[
@@ -84,7 +91,7 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
               <div key={row.label} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
                 <Icon name={row.icon} size={16} color="#D4A017" />
                 <span style={{ color: '#64748b', fontSize: 13, flex: 1 }}>{row.label}</span>
-                <span style={{ color: '#f1f5f9', fontSize: 13, fontWeight: 600 }}>{row.val}</span>
+                <span style={{ color: '#f1f5f9', fontSize: isMobile ? 12 : 13, fontWeight: 600 }}>{row.val}</span>
               </div>
             ))}
 
@@ -95,13 +102,13 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
                 { label: 'Occupancy Taxes', val: `RM ${taxes}.00` },
               ].map(row => (
                 <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-                  <span style={{ color: '#64748b', fontSize: 14 }}>{row.label}</span>
-                  <span style={{ color: '#94a3b8', fontSize: 14 }}>{row.val}</span>
+                  <span style={{ color: '#64748b', fontSize: isMobile ? 13 : 14 }}>{row.label}</span>
+                  <span style={{ color: '#94a3b8', fontSize: isMobile ? 13 : 14 }}>{row.val}</span>
                 </div>
               ))}
               <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, paddingTop: 16, borderTop: '1px solid #1e293b' }}>
-                <span style={{ color: '#f1f5f9', fontSize: 16, fontWeight: 700 }}>Total Amount</span>
-                <span style={{ color: '#D4A017', fontSize: 22, fontWeight: 700 }}>RM {total}.00</span>
+                <span style={{ color: '#f1f5f9', fontSize: isMobile ? 15 : 16, fontWeight: 700 }}>Total Amount</span>
+                <span style={{ color: '#D4A017', fontSize: isMobile ? 18 : 22, fontWeight: 700 }}>RM {total}.00</span>
               </div>
             </div>
 
@@ -115,13 +122,15 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
           </div>
 
           {/* ── Payment Form ─────────────────────────────────── */}
-          <div style={{ background: '#0d1424', border: '2px solid rgba(212,160,23,0.25)', borderRadius: 16, padding: 32 }}>
+          <div style={{ background: '#0d1424', border: '2px solid rgba(212,160,23,0.25)', borderRadius: 16, padding: isMobile ? 20 : 32 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
-              <h2 style={{ color: '#f1f5f9', fontSize: 22, fontWeight: 700, fontFamily: "'Playfair Display', Georgia, serif" }}>Payment Information</h2>
-              <div style={{ display: 'flex', gap: 8 }}>
-                <Icon name="card" size={20} color="#334155" />
-                <Icon name="lock" size={20} color="#334155" />
-              </div>
+              <h2 style={{ color: '#f1f5f9', fontSize: isMobile ? 18 : 22, fontWeight: 700, fontFamily: "'Playfair Display', Georgia, serif" }}>Payment Information</h2>
+              {!isMobile && (
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <Icon name="card" size={20} color="#334155" />
+                  <Icon name="lock" size={20} color="#334155" />
+                </div>
+              )}
             </div>
 
             {/* Name */}
@@ -132,7 +141,7 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
                 <input
                   type="text" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                   placeholder="Johnathan Doe"
-                  style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: 15, outline: 'none', fontFamily: 'inherit', flex: 1 }}
+                  style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 14 : 15, outline: 'none', fontFamily: 'inherit', flex: 1 }}
                 />
               </div>
               {errors.name && <p style={{ color: '#ef4444', fontSize: 11, marginTop: 4 }}>{errors.name}</p>}
@@ -146,7 +155,7 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
                 <input
                   type="text" value={form.card} onChange={e => setForm(p => ({ ...p, card: formatCard(e.target.value) }))}
                   placeholder="0000 0000 0000 0000" maxLength={19}
-                  style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: 15, outline: 'none', fontFamily: 'inherit', flex: 1, letterSpacing: '0.05em' }}
+                  style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 14 : 15, outline: 'none', fontFamily: 'inherit', flex: 1, letterSpacing: '0.05em' }}
                 />
               </div>
               {errors.card && <p style={{ color: '#ef4444', fontSize: 11, marginTop: 4 }}>{errors.card}</p>}
@@ -161,7 +170,7 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
                   <input
                     type="text" value={form.expiry} onChange={e => setForm(p => ({ ...p, expiry: formatExpiry(e.target.value) }))}
                     placeholder="MM / YY" maxLength={5}
-                    style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: 15, outline: 'none', fontFamily: 'inherit', flex: 1 }}
+                    style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 13 : 15, outline: 'none', fontFamily: 'inherit', flex: 1 }}
                   />
                 </div>
                 {errors.expiry && <p style={{ color: '#ef4444', fontSize: 11, marginTop: 4 }}>{errors.expiry}</p>}
@@ -173,7 +182,7 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
                   <input
                     type="password" value={form.cvv} onChange={e => setForm(p => ({ ...p, cvv: e.target.value.replace(/\D/g, '').slice(0, 3) }))}
                     placeholder="123" maxLength={3}
-                    style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: 15, outline: 'none', fontFamily: 'inherit', flex: 1 }}
+                    style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 13 : 15, outline: 'none', fontFamily: 'inherit', flex: 1 }}
                   />
                 </div>
                 {errors.cvv && <p style={{ color: '#ef4444', fontSize: 11, marginTop: 4 }}>{errors.cvv}</p>}
@@ -191,10 +200,10 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
               onClick={handlePay}
               disabled={loading}
               style={{
-                width: '100%', padding: '16px',
+                width: '100%', padding: isMobile ? '14px' : '16px',
                 background: loading ? '#92400e' : '#D4A017',
                 color: '#000', border: 'none', borderRadius: 12,
-                fontSize: 14, fontWeight: 800, cursor: loading ? 'wait' : 'pointer',
+                fontSize: isMobile ? 13 : 14, fontWeight: 800, cursor: loading ? 'wait' : 'pointer',
                 fontFamily: 'inherit', display: 'flex', alignItems: 'center',
                 justifyContent: 'center', gap: 8, letterSpacing: '0.06em', transition: 'all 0.2s',
               }}
