@@ -204,9 +204,9 @@ export const EXPERIENCES = [
     id: 3,
     category: 'DINING',
     icon: '🍽️',
-    title: 'Theatre Restaurant',
+    title: 'Tabas Lounge',
     description:
-      'Savour Chinese, Malaysian and local Sarawakian cuisine at our on-site Theatre Restaurant — serving breakfast, lunch and dinner.',
-    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80',
+      'Chill out at Tabas Lounge by Regatta Suites with cozy vibe.',
+    image: 'https://scontent.fkch2-1.fna.fbcdn.net/v/t39.30808-6/480515649_1060633199412399_6521182119698362404_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=_R5ARJPgfk0Q7kNvwFEgDjN&_nc_oc=AdkPbPH5jn18d8AAS0Tyf5iYcfzEN2sgfWERyeXWK0pGycNfeN0e0hCZp1tD8wxNj3K6Ggv64lOZxDjHj90PMlMU&_nc_zt=23&_nc_ht=scontent.fkch2-1.fna&_nc_gid=B4UayUjoBZf3Lgbcgkgrbg&_nc_ss=8&oh=00_Afwmdgt_p91rgZa6-IZ-gh28PiFXpP_M6RSMRpH75aMOHQ&oe=69B3A8BC',
   },
 ];

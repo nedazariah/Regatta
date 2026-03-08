@@ -31,9 +31,6 @@ const HomePage = ({ navigate, setBooking }) => {
         }} />
 
         <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', width: '100%', maxWidth: 680, padding: '0 24px' }}>
-          {/* Logo */}
-          <img src={LOGO_URL} alt="Regatta Suites" style={{ height: 64, objectFit: 'contain', marginBottom: 28 }} />
-
           {/* Badge */}
           <div style={{
             display: 'inline-block', border: '1px solid rgba(212,160,23,0.4)',
@@ -114,7 +111,7 @@ const HomePage = ({ navigate, setBooking }) => {
                 <select
                   value={guests} onChange={e => setGuests(e.target.value)}
                   style={{
-                    background: 'none', border: 'none', color: '#e2e8f0',
+                    background: 'rgba(13, 20, 36, 0.92)', border: 'none', color: '#e2e8f0',
                     fontSize: 15, fontWeight: 500, outline: 'none',
                     fontFamily: 'inherit', cursor: 'pointer', colorScheme: 'dark',
                     width: '100%',
@@ -180,12 +177,6 @@ const HomePage = ({ navigate, setBooking }) => {
               Everything You Need,<br />Under One Roof
             </h2>
           </div>
-          <button
-            onClick={() => navigate('rooms')}
-            style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: 14, display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'inherit' }}
-          >
-            View All Rooms <Icon name="arrow" size={16} color="#94a3b8" />
-          </button>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
