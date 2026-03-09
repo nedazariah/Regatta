@@ -14,6 +14,9 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
   const taxes = 45;
   const total = nightly + serviceFee + taxes;
 
+  const checkin = booking.checkIn;
+  const checkout = booking.checkOut;
+
   const [form, setForm] = useState({ name: '', card: '', expiry: '', cvv: '' });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -36,6 +39,8 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
       setConfirmation({
         room,
         total,
+        checkin,
+        checkout,
         ref: `RS-${Math.floor(Math.random() * 90000 + 10000)}`,
         card: form.card.replace(/\s/g, '').slice(-4),
       });

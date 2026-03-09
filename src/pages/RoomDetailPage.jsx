@@ -38,7 +38,7 @@ const BookingPanel = ({ room, checkIn, checkOut, setCheckIn, setCheckOut, onBook
       <div key={label} style={{ marginBottom: 10 }}>
         <label style={{ color: '#64748b', fontSize: 11, display: 'block', marginBottom: 4 }}>{label}</label>
         <input
-          type="date" value={val} onChange={e => set(e.target.value)}
+          type="date" value={val} min={new Date().toISOString().split('T')[0]} onChange={e => set(e.target.value)}
           style={{
             width: '100%', background: '#070c1a', border: '1px solid #1e293b',
             borderRadius: 8, padding: '10px 12px', color: '#e2e8f0', fontSize: 14,

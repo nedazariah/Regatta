@@ -83,7 +83,7 @@ const HomePage = ({ navigate, setBooking }) => {
                     <label style={{ display: 'block', color: '#D4A017', fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', marginBottom: 6 }}>{label}</label>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                       <Icon name="calendar" size={13} color="#64748b" />
-                      <input type="date" value={val} onChange={e => set(e.target.value)}
+                      <input type="date" value={val} min={new Date().toISOString().split('T')[0]} onChange={e => set(e.target.value)}
                         style={{ background: 'none', border: 'none', color: val ? '#e2e8f0' : '#475569', fontSize: 12, outline: 'none', fontFamily: 'inherit', width: '100%', colorScheme: 'dark' }}
                       />
                     </div>
@@ -104,7 +104,7 @@ const HomePage = ({ navigate, setBooking }) => {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                         <Icon name="calendar" size={16} color="#64748b" />
                         <input
-                          type="date" value={val} onChange={e => set(e.target.value)}
+                          type="date" value={val} min={new Date().toISOString().split('T')[0]} onChange={e => set(e.target.value)}
                           style={{
                             background: 'none', border: 'none', color: val ? '#e2e8f0' : '#475569',
                             fontSize: 15, fontWeight: 500, outline: 'none',

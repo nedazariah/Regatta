@@ -5,7 +5,7 @@ const ConfirmationPage = ({ confirmation, navigate }) => {
   const { w } = useWindowSize();
   const isMobile = w < 768;
 
-  const { room, total, ref, card } = confirmation;
+  const { room, total, checkin, checkout, ref, card } = confirmation;
 
   const handleDownload = () => {
     const content = `
@@ -13,8 +13,8 @@ REGATTA SUITES KUCHING – BOOKING CONFIRMATION
 ==============================================
 Ref: #${ref}
 Room: ${room.name}
-Check-in:  (After 2:00 PM)
-Check-out: (Before 12:00 Noon)
+Check-in: ${checkin} (After 2:00 PM)
+Check-out: ${checkout} (Before 12:00 Noon)
 
 PAYMENT DETAILS
 Room Rate ....... RM ${room.price}.00/night
@@ -80,12 +80,12 @@ Tel: +60 82-230099 | +60 82-231999
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 24 }}>
                 <div>
                   <p style={{ color: '#64748b', fontSize: 11, marginBottom: 4 }}>Check-in</p>
-                  <p style={{ color: '#f1f5f9', fontSize: 16, fontWeight: 700 }}>—</p>
+                  <p style={{ color: '#f1f5f9', fontSize: 16, fontWeight: 700 }}>{checkin}</p>
                   <p style={{ color: '#64748b', fontSize: 11 }}>After 2:00 PM</p>
                 </div>
                 <div>
                   <p style={{ color: '#64748b', fontSize: 11, marginBottom: 4 }}>Check-out</p>
-                  <p style={{ color: '#f1f5f9', fontSize: 16, fontWeight: 700 }}>—</p>
+                  <p style={{ color: '#f1f5f9', fontSize: 16, fontWeight: 700 }}>{checkout}</p>
                   <p style={{ color: '#64748b', fontSize: 11 }}>Before 12:00 Noon</p>
                 </div>
               </div>
