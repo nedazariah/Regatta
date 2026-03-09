@@ -20,7 +20,7 @@ const RoomsPage = ({ navigate, setSelectedRoom }) => {
       <div style={{ padding: `18px ${px}`, background: '#050a18', borderBottom: '1px solid #0f172a' }}>
         <span style={{ color: '#64748b', fontSize: 13 }}>
           <span style={{ cursor: 'pointer', transition: 'color 0.2s' }}
-            onClick={() => navigate('home')}
+            onClick={() => navigate('/')} // ← CHANGED: '/'
             onMouseEnter={e => e.target.style.color = '#D4A017'}
             onMouseLeave={e => e.target.style.color = '#64748b'}
           >Home</span>
@@ -37,7 +37,7 @@ const RoomsPage = ({ navigate, setSelectedRoom }) => {
           Immerse yourself in urban comfort. Each of our 144 rooms is designed for your relaxation, with Slumberland mattresses and modern amenities throughout.
         </p>
 
-        {/* Filter Tabs — horizontally scrollable on mobile */}
+        {/* Filter Tabs */}
         <div style={{ display: 'flex', gap: 10, marginBottom: isMobile ? 28 : 40, overflowX: 'auto', paddingBottom: 4, WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
           {filters.map(f => (
             <button
@@ -57,7 +57,7 @@ const RoomsPage = ({ navigate, setSelectedRoom }) => {
           ))}
         </div>
 
-        {/* Room Grid — 1 col mobile, 2 col tablet, auto-fill desktop */}
+        {/* Room Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr 1fr' : 'repeat(auto-fill, minmax(340px, 1fr))', gap: isMobile ? 16 : 24 }}>
           {filtered.map(room => (
             <div
@@ -106,7 +106,7 @@ const RoomsPage = ({ navigate, setSelectedRoom }) => {
                 <p style={{ color: '#64748b', fontSize: isMobile ? 12 : 13, lineHeight: 1.6, marginBottom: 18 }}>{room.description}</p>
 
                 <button
-                  onClick={() => { setSelectedRoom(room); navigate('room-detail'); }}
+                  onClick={() => { setSelectedRoom(room); navigate('/room-detail'); }}
                   style={{
                     width: '100%', padding: isMobile ? '10px' : '11px', background: '#1e3a6e',
                     color: '#60a5fa', border: 'none', borderRadius: 10,

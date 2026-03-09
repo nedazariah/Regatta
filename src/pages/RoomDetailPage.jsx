@@ -10,7 +10,6 @@ const AMENITY_ICONS = {
   'Mini Fridge': 'glass',
 };
 
-// Extracted so it can be placed inline (mobile) or in sidebar (desktop)
 const BookingPanel = ({ room, checkIn, checkOut, setCheckIn, setCheckOut, onBook }) => (
   <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: 24, marginBottom: 16 }}>
     <p style={{ color: '#64748b', fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', marginBottom: 8 }}>TOTAL ESTIMATE</p>
@@ -80,16 +79,15 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
 
   const handleBook = () => {
     setBooking(prev => ({ ...prev, room, checkIn, checkOut }));
-    navigate('checkout');
+    navigate('/checkout');
   };
 
   return (
     <div style={{ background: '#070c1a', minHeight: '100vh', paddingTop: 64, paddingBottom: isMobile ? 80 : 0 }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: `36px ${px} 80px` }}>
 
-        {/* Back */}
         <button
-          onClick={() => navigate('rooms')}
+          onClick={() => navigate('/rooms')}
           style={{
             background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer',
             fontSize: 14, display: 'flex', alignItems: 'center', gap: 8, marginBottom: 28,
@@ -101,7 +99,6 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
           ← Back to Rooms
         </button>
 
-        {/* Two-column on desktop/tablet, single column on mobile */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: isMobile ? '1fr' : '1fr 360px',
@@ -111,7 +108,6 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
 
           {/* ── LEFT ─────────────────────────────────────────── */}
           <div>
-            {/* Main image */}
             <div style={{ borderRadius: 16, overflow: 'hidden', position: 'relative', height: isMobile ? 240 : 360, marginBottom: 12 }}>
               <img
                 src={room.images[mainImg]}
@@ -131,7 +127,6 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
               </div>
             </div>
 
-            {/* Thumbnails — scrollable row on mobile */}
             <div style={{ display: 'flex', gap: 10, marginBottom: isMobile ? 24 : 32, overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
               {room.images.map((img, i) => (
                 <div
@@ -152,7 +147,6 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
               ))}
             </div>
 
-            {/* Room Overview */}
             <div style={{ marginBottom: 32 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
                 <div style={{ width: 32, height: 2, background: '#2563eb' }} />
@@ -161,7 +155,6 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
               <p style={{ color: '#94a3b8', fontSize: isMobile ? 13 : 15, lineHeight: 1.85 }}>{room.longDescription}</p>
             </div>
 
-            {/* Quick specs — 2 col on mobile, 4 col on desktop */}
             <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: 12, marginBottom: 32 }}>
               {[
                 { label: 'Room Size', val: room.size },
@@ -176,13 +169,11 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
               ))}
             </div>
 
-            {/* Bed info */}
             <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 12, padding: '14px 20px', marginBottom: 32, display: 'flex', alignItems: 'center', gap: 12 }}>
               <Icon name="bed" size={18} color="#D4A017" />
               <span style={{ color: '#94a3b8', fontSize: isMobile ? 13 : 14 }}><strong style={{ color: '#e2e8f0' }}>Bed Configuration:</strong> {room.bedInfo}</span>
             </div>
 
-            {/* Amenities */}
             <div style={{ marginBottom: 32 }}>
               <h3 style={{ color: '#f1f5f9', fontSize: isMobile ? 16 : 18, fontWeight: 700, marginBottom: 16, fontFamily: "'Playfair Display', Georgia, serif" }}>Room Amenities</h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 20 }}>
@@ -195,7 +186,6 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
                   </div>
                 ))}
               </div>
-              {/* Full amenity list — 1 col mobile, 2 col desktop */}
               <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: 10 }}>
                 {room.amenities.map(a => (
                   <div key={a} style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#94a3b8', fontSize: isMobile ? 13 : 14 }}>
@@ -208,14 +198,12 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
               </div>
             </div>
 
-            {/* Notes */}
             {room.note && (
               <div style={{ background: 'rgba(212,160,23,0.06)', border: '1px solid rgba(212,160,23,0.2)', borderRadius: 10, padding: '12px 16px' }}>
                 <p style={{ color: '#94a3b8', fontSize: 13 }}>⚠️ {room.note} Fees on certain amenities/services may apply. Actual room design may vary.</p>
               </div>
             )}
 
-            {/* Booking panel inline — mobile only */}
             {isMobile && (
               <div style={{ marginTop: 28 }}>
                 <BookingPanel
@@ -238,7 +226,6 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
                 onBook={handleBook}
               />
 
-              {/* Quick stats card */}
               <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 14, padding: 18, marginBottom: 16 }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                   {[
@@ -255,7 +242,6 @@ const RoomDetailPage = ({ room, navigate, booking, setBooking }) => {
                 </div>
               </div>
 
-              {/* Contact card */}
               <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 14, padding: 18 }}>
                 <p style={{ color: '#64748b', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', marginBottom: 12 }}>NEED HELP?</p>
                 <a href="tel:+6082230099" style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#94a3b8', fontSize: 13, textDecoration: 'none', marginBottom: 8 }}>

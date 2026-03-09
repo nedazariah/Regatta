@@ -39,7 +39,7 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
         ref: `RS-${Math.floor(Math.random() * 90000 + 10000)}`,
         card: form.card.replace(/\s/g, '').slice(-4),
       });
-      navigate('confirmation');
+      navigate('/confirmation');
     }, 1800);
   };
 
@@ -50,11 +50,13 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
   };
 
   return (
-    <div style={{ background: '#070c1a', minHeight: '100vh', paddingTop: 64 }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: isMobile ? '28px 20px 60px' : '48px 40px' }}>
+    // ← FIX: overflowX hidden prevents any child from blowing out the viewport width
+    <div style={{ background: '#070c1a', minHeight: '100vh', paddingTop: 64, overflowX: 'hidden' }}>
+      {/* ← FIX: width 100% + boxSizing border-box ensures padding doesn't add to width */}
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: isMobile ? '28px 20px 60px' : '48px 40px', width: '100%', boxSizing: 'border-box' }}>
 
         <button
-          onClick={() => navigate('room-detail')}
+          onClick={() => navigate('/room-detail')} // ← CHANGED: '/room-detail'
           style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: 14, display: 'flex', alignItems: 'center', gap: 8, marginBottom: 24, fontFamily: 'inherit', padding: 0 }}
         >
           ← Back
@@ -65,11 +67,10 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
         </h1>
         <p style={{ color: '#64748b', marginBottom: isMobile ? 24 : 40, fontSize: isMobile ? 13 : 15 }}>Secure your luxury stay at Regatta Stay</p>
 
-        {/* Stacked on mobile, side-by-side on desktop */}
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.3fr', gap: isMobile ? 20 : 28 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.3fr', gap: isMobile ? 20 : 28, minWidth: 0 }}>
 
           {/* ── Booking Summary ──────────────────────────────── */}
-          <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: isMobile ? 20 : 28 }}>
+          <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: isMobile ? 20 : 28, minWidth: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
               <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(212,160,23,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ color: '#D4A017', fontSize: 14 }}>ℹ</span>
@@ -122,7 +123,7 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
           </div>
 
           {/* ── Payment Form ─────────────────────────────────── */}
-          <div style={{ background: '#0d1424', border: '2px solid rgba(212,160,23,0.25)', borderRadius: 16, padding: isMobile ? 20 : 32 }}>
+          <div style={{ background: '#0d1424', border: '2px solid rgba(212,160,23,0.25)', borderRadius: 16, padding: isMobile ? 20 : 32, minWidth: 0 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
               <h2 style={{ color: '#f1f5f9', fontSize: isMobile ? 18 : 22, fontWeight: 700, fontFamily: "'Playfair Display', Georgia, serif" }}>Payment Information</h2>
               {!isMobile && (
@@ -136,12 +137,13 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
             {/* Name */}
             <div style={{ marginBottom: 20 }}>
               <label style={{ color: '#64748b', fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', display: 'block', marginBottom: 8 }}>CARDHOLDER NAME</label>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#070c1a', border: `1px solid ${errors.name ? '#ef4444' : '#1e293b'}`, borderRadius: 10, padding: '14px 16px' }}>
+              {/* ← FIX: minWidth: 0 allows the flex container to shrink on mobile */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#070c1a', border: `1px solid ${errors.name ? '#ef4444' : '#1e293b'}`, borderRadius: 10, padding: '14px 16px', minWidth: 0 }}>
                 <Icon name="user" size={16} color="#475569" />
                 <input
                   type="text" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                   placeholder="Johnathan Doe"
-                  style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 14 : 15, outline: 'none', fontFamily: 'inherit', flex: 1 }}
+                  style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 14 : 15, outline: 'none', fontFamily: 'inherit', flex: 1, minWidth: 0 }}
                 />
               </div>
               {errors.name && <p style={{ color: '#ef4444', fontSize: 11, marginTop: 4 }}>{errors.name}</p>}
@@ -150,39 +152,42 @@ const CheckoutPage = ({ booking, navigate, setConfirmation }) => {
             {/* Card Number */}
             <div style={{ marginBottom: 20 }}>
               <label style={{ color: '#64748b', fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', display: 'block', marginBottom: 8 }}>CARD NUMBER</label>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#070c1a', border: `1px solid ${errors.card ? '#ef4444' : '#1e293b'}`, borderRadius: 10, padding: '14px 16px' }}>
+              {/* ← FIX: minWidth: 0 on container and input */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#070c1a', border: `1px solid ${errors.card ? '#ef4444' : '#1e293b'}`, borderRadius: 10, padding: '14px 16px', minWidth: 0 }}>
                 <Icon name="card" size={16} color="#475569" />
                 <input
                   type="text" value={form.card} onChange={e => setForm(p => ({ ...p, card: formatCard(e.target.value) }))}
                   placeholder="0000 0000 0000 0000" maxLength={19}
-                  style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 14 : 15, outline: 'none', fontFamily: 'inherit', flex: 1, letterSpacing: '0.05em' }}
+                  style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 14 : 15, outline: 'none', fontFamily: 'inherit', flex: 1, letterSpacing: '0.05em', minWidth: 0 }}
                 />
               </div>
               {errors.card && <p style={{ color: '#ef4444', fontSize: 11, marginTop: 4 }}>{errors.card}</p>}
             </div>
 
             {/* Expiry + CVV */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 24 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr': '1fr 1fr', gap: 16, marginBottom: 24 }}>
               <div>
                 <label style={{ color: '#64748b', fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', display: 'block', marginBottom: 8 }}>EXPIRY DATE</label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#070c1a', border: `1px solid ${errors.expiry ? '#ef4444' : '#1e293b'}`, borderRadius: 10, padding: '14px 14px' }}>
+                {/* ← FIX: minWidth: 0 */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#070c1a', border: `1px solid ${errors.expiry ? '#ef4444' : '#1e293b'}`, borderRadius: 10, padding: '14px 14px', minWidth: 0 }}>
                   <Icon name="calendar" size={16} color="#475569" />
                   <input
                     type="text" value={form.expiry} onChange={e => setForm(p => ({ ...p, expiry: formatExpiry(e.target.value) }))}
                     placeholder="MM / YY" maxLength={5}
-                    style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 13 : 15, outline: 'none', fontFamily: 'inherit', flex: 1 }}
+                    style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 13 : 15, outline: 'none', fontFamily: 'inherit', flex: 1, minWidth: 0 }}
                   />
                 </div>
                 {errors.expiry && <p style={{ color: '#ef4444', fontSize: 11, marginTop: 4 }}>{errors.expiry}</p>}
               </div>
               <div>
                 <label style={{ color: '#64748b', fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', display: 'block', marginBottom: 8 }}>CVV / CVC</label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#070c1a', border: `1px solid ${errors.cvv ? '#ef4444' : '#1e293b'}`, borderRadius: 10, padding: '14px 14px' }}>
+                {/* ← FIX: minWidth: 0 */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#070c1a', border: `1px solid ${errors.cvv ? '#ef4444' : '#1e293b'}`, borderRadius: 10, padding: '14px 14px', minWidth: 0 }}>
                   <Icon name="lock" size={16} color="#475569" />
                   <input
                     type="password" value={form.cvv} onChange={e => setForm(p => ({ ...p, cvv: e.target.value.replace(/\D/g, '').slice(0, 3) }))}
                     placeholder="123" maxLength={3}
-                    style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 13 : 15, outline: 'none', fontFamily: 'inherit', flex: 1 }}
+                    style={{ background: 'none', border: 'none', color: '#e2e8f0', fontSize: isMobile ? 13 : 15, outline: 'none', fontFamily: 'inherit', flex: 1, minWidth: 0 }}
                   />
                 </div>
                 {errors.cvv && <p style={{ color: '#ef4444', fontSize: 11, marginTop: 4 }}>{errors.cvv}</p>}

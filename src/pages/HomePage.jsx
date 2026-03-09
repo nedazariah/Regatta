@@ -17,7 +17,7 @@ const HomePage = ({ navigate, setBooking }) => {
 
   const handleSearch = () => {
     setBooking(prev => ({ ...prev, checkIn, checkOut, guests }));
-    navigate('rooms');
+    navigate('/rooms');
   };
 
   return (
@@ -30,7 +30,6 @@ const HomePage = ({ navigate, setBooking }) => {
         position: 'relative', overflow: 'hidden',
         padding: isMobile ? '88px 0 48px' : '0',
       }}>
-        {/* Background image overlay */}
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: 'url(https://www.regattasuites.com.my/wp-content/uploads/2024/05/Deluxe-Queen-Bed.jpg)',
@@ -41,7 +40,6 @@ const HomePage = ({ navigate, setBooking }) => {
           position: 'relative', zIndex: 1, textAlign: 'center',
           width: '100%', maxWidth: 680, padding: isMobile ? '0 20px' : '0 24px',
         }}>
-          {/* Badge */}
           <div style={{
             display: 'inline-block', border: '1px solid rgba(212,160,23,0.4)',
             borderRadius: 20, padding: '5px 16px', marginBottom: isMobile ? 14 : 20,
@@ -78,9 +76,7 @@ const HomePage = ({ navigate, setBooking }) => {
             border: '1px solid rgba(212,160,23,0.18)',
             boxShadow: '0 24px 64px rgba(0,0,0,0.5)',
           }}>
-            {/* Check-in / Check-out */}
             {isMobile ? (
-              /* Mobile: 2-column compact grid */
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
                 {[['CHECK-IN', checkIn, setCheckIn], ['CHECK-OUT', checkOut, setCheckOut]].map(([label, val, set]) => (
                   <div key={label}>
@@ -95,7 +91,6 @@ const HomePage = ({ navigate, setBooking }) => {
                 ))}
               </div>
             ) : (
-              /* Desktop: side-by-side with vertical divider */
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1px 1fr', gap: 0, marginBottom: 16 }}>
                 {[
                   { label: 'CHECK-IN', val: checkIn, set: setCheckIn },
@@ -126,10 +121,8 @@ const HomePage = ({ navigate, setBooking }) => {
               </div>
             )}
 
-            {/* Thin separator */}
             <div style={{ height: 1, background: 'rgba(255,255,255,0.07)', marginBottom: isMobile ? 12 : 16 }} />
 
-            {/* Guests */}
             <div style={{ marginBottom: isMobile ? 14 : 20 }}>
               <label style={{ display: 'block', color: '#D4A017', fontSize: isMobile ? 9 : 10, fontWeight: 700, letterSpacing: '0.12em', marginBottom: isMobile ? 6 : 8 }}>
                 GUESTS
@@ -154,7 +147,6 @@ const HomePage = ({ navigate, setBooking }) => {
               </div>
             </div>
 
-            {/* Search button */}
             <button
               onClick={handleSearch}
               style={{
@@ -178,7 +170,6 @@ const HomePage = ({ navigate, setBooking }) => {
           </div>
         </div>
 
-        {/* Scroll indicator — desktop only */}
         {!isMobile && (
           <div style={{ position: 'absolute', bottom: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, color: '#475569', fontSize: 10, letterSpacing: '0.12em' }}>
             <span>DISCOVER MORE</span>
@@ -255,7 +246,7 @@ const HomePage = ({ navigate, setBooking }) => {
         <div style={{
           display: 'flex', alignItems: isMobile ? 'flex-start' : 'center',
           justifyContent: 'space-between', flexDirection: isMobile ? 'column' : 'row',
-          flexWrap: 'wrap', gap: isMobile ? 20 : 20,
+          flexWrap: 'wrap', gap: 20,
         }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
             <Icon name="map" size={20} color="#D4A017" />

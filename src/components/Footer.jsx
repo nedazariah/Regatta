@@ -16,7 +16,7 @@ const Footer = ({ navigate }) => {
       <div style={{ display: 'grid', gridTemplateColumns: gridCols, gap: isMobile ? 32 : 48, marginBottom: 48 }}>
         {/* Brand */}
         <div>
-          <div onClick={() => navigate('home')} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', marginBottom: 16 }}>
+          <div onClick={() => navigate('/')} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', marginBottom: 16 }}> {/* ← CHANGED: '/' */}
             <img src={LOGO_URL} alt="Regatta Suites" style={{ height: 44, objectFit: 'contain' }} />
           </div>
           <p style={{ color: '#64748b', fontSize: 13, lineHeight: 1.7, maxWidth: 260 }}>
@@ -34,7 +34,6 @@ const Footer = ({ navigate }) => {
           </div>
         </div>
 
-        {/* Quick Links — hidden on mobile */}
         {!isMobile && (
           <div>
             <h4 style={{ color: '#f1f5f9', fontSize: 14, fontWeight: 600, marginBottom: 16 }}>Quick Links</h4>
@@ -47,7 +46,6 @@ const Footer = ({ navigate }) => {
           </div>
         )}
 
-        {/* Hotel Services — hidden on mobile */}
         {!isMobile && (
           <div>
             <h4 style={{ color: '#f1f5f9', fontSize: 14, fontWeight: 600, marginBottom: 16 }}>Hotel Services</h4>
@@ -60,7 +58,6 @@ const Footer = ({ navigate }) => {
           </div>
         )}
 
-        {/* Contact — always shown */}
         <div>
           <h4 style={{ color: '#f1f5f9', fontSize: 14, fontWeight: 600, marginBottom: 16 }}>Contact Us</h4>
           <div style={{ color: '#64748b', fontSize: 13, lineHeight: 1.9 }}>

@@ -55,7 +55,7 @@ Tel: +60 82-230099 | +60 82-231999
             Booking Confirmed!
           </h1>
           <p style={{ color: '#94a3b8', fontSize: isMobile ? 14 : 15, lineHeight: 1.7 }}>
-            Your stay at Regatta Suites Kuching is all set.{isMobile ? ' ' : <br />}A confirmation email has been sent to your inbox.
+            Your stay at Regatta Suites Kuching is all set. A confirmation email has been sent to your inbox.
           </p>
         </div>
 
@@ -71,7 +71,6 @@ Tel: +60 82-230099 | +60 82-231999
             </div>
           </div>
 
-          {/* Inner grid — stacked on mobile, side-by-side on desktop */}
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 0 }}>
             {/* Reservation Summary */}
             <div style={{ padding: isMobile ? 20 : 28, borderRight: isMobile ? 'none' : '1px solid #1e293b', borderBottom: isMobile ? '1px solid #1e293b' : 'none' }}>
@@ -145,7 +144,7 @@ Tel: +60 82-230099 | +60 82-231999
               </button>
 
               <button
-                onClick={() => navigate('home')}
+                onClick={() => navigate('/')}
                 style={{
                   width: '100%', padding: '13px', background: 'none',
                   color: '#94a3b8', border: '1px solid #1e293b', borderRadius: 12,
@@ -169,7 +168,7 @@ Tel: +60 82-230099 | +60 82-231999
           </div>
         </div>
 
-        {/* Address + Contact — stacked on mobile */}
+        {/* Address + Contact */}
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 20, marginTop: 24 }}>
           <div style={{ background: '#0d1424', border: '1px solid #1e293b', borderRadius: 16, padding: isMobile ? 20 : 24 }}>
             <p style={{ color: '#D4A017', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', marginBottom: 10 }}>HOTEL ADDRESS</p>

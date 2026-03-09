@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Icon from './Icon';
 import useWindowSize from '../hooks/useWindowSize';
 
-// Real transparent PNG logo from regattasuites.com.my
 const LOGO_URL = 'https://www.regattasuites.com.my/wp-content/uploads/2024/09/cropped-cropped-1727524546571-e1727526943510.png';
 
 const Header = ({ currentPage, navigate }) => {
@@ -10,11 +9,11 @@ const Header = ({ currentPage, navigate }) => {
   const isMobile = w < 768;
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navLinks = [
-    { label: 'Home', page: 'home' },
-    { label: 'Rooms', page: 'rooms' },
-    { label: 'Facilities', page: 'home' },
-    { label: 'Contact', page: 'home' },
+    const navLinks = [
+    { label: 'Home',       page: '/' },
+    { label: 'Rooms',      page: '/rooms' },
+    { label: 'Facilities', page: '/' },
+    { label: 'Contact',    page: '/' },
   ];
 
   const handleNav = (page) => {
@@ -31,7 +30,7 @@ const Header = ({ currentPage, navigate }) => {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: isMobile ? '0 20px' : '0 40px', height: 64,
       }}>
-        <div onClick={() => handleNav('home')} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+        <div onClick={() => handleNav('/')} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
           <img src={LOGO_URL} alt="Regatta Suites" style={{ height: isMobile ? 34 : 40, objectFit: 'contain' }} />
         </div>
 
@@ -44,11 +43,11 @@ const Header = ({ currentPage, navigate }) => {
                 onClick={() => navigate(link.page)}
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-                  color: currentPage === link.page && link.page === 'rooms' ? '#D4A017' : '#cbd5e1',
+                  color: currentPage === '/rooms' && link.page === '/rooms' ? '#D4A017' : '#cbd5e1',
                   fontSize: 14, fontWeight: 500, fontFamily: 'inherit', transition: 'color 0.2s',
                 }}
                 onMouseEnter={e => e.target.style.color = '#D4A017'}
-                onMouseLeave={e => e.target.style.color = (currentPage === link.page && link.page === 'rooms') ? '#D4A017' : '#cbd5e1'}
+                onMouseLeave={e => e.target.style.color = (currentPage === '/rooms' && link.page === '/rooms') ? '#D4A017' : '#cbd5e1'}
               >
                 {link.label}
               </button>
@@ -60,7 +59,7 @@ const Header = ({ currentPage, navigate }) => {
         {!isMobile && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <button
-              onClick={() => navigate('rooms')}
+              onClick={() => navigate('/rooms')}
               style={{
                 background: '#2563eb', color: '#fff', border: 'none', borderRadius: 8,
                 padding: '9px 20px', fontSize: 14, fontWeight: 600, cursor: 'pointer',
@@ -91,7 +90,7 @@ const Header = ({ currentPage, navigate }) => {
         )}
       </header>
 
-      {/* Mobile full-screen drawer */}
+      {/* Mobile drawer */}
       {isMobile && menuOpen && (
         <div style={{
           position: 'fixed', top: 64, left: 0, right: 0, zIndex: 999,
@@ -114,7 +113,7 @@ const Header = ({ currentPage, navigate }) => {
             </button>
           ))}
           <button
-            onClick={() => handleNav('rooms')}
+            onClick={() => handleNav('/rooms')}
             style={{
               marginTop: 20, width: '100%', padding: '13px',
               background: '#2563eb', color: '#fff', border: 'none', borderRadius: 10,
